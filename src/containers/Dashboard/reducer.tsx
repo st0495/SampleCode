@@ -27,7 +27,6 @@ const initialState = {
       id: 4,
       description: "House rent",
       category: "Food & Dining",
-
       amount: "35900",
       date: "09-03-2021",
     },

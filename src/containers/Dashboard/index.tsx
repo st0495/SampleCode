@@ -120,6 +120,15 @@ const DashBoardScreen = () => {
             date: moment(value.date).format("D"),
             value: value.amount,
           };
+          if (
+            list[parseInt(moment(value.date).format("D"), 10) - 1].value > 0
+          ) {
+            list.splice(
+              parseInt(moment(value.date).format("D"), 10) - 1,
+              0,
+              data
+            );
+          }
           list[parseInt(moment(value.date).format("D"), 10) - 1] = data;
         }
       }
