@@ -97,7 +97,7 @@ const DashBoardScreen = () => {
       return parseInt(b.amount, 10) - parseInt(a.amount, 10);
     });
     sortedList.forEach((value: { amount: number }) => {
-      if (monthlyBudget >= 0 && monthlyBudget > value.amount) {
+      if (monthlyBudget >= 0 && monthlyBudget >= value.amount) {
         monthlyBudget = monthlyBudget - value.amount;
         minimumBillList.push(value);
       }
@@ -144,22 +144,24 @@ const DashBoardScreen = () => {
       const index = list.findIndex(
         (bill: { id: Number }) => bill.id === record.id
       );
-      list[index].category =
-        record.category !== category ? category : record.category;
-      list[index].description =
-        record.description !== description ? description : record.description;
-      list[index].amount = record.amount ? amount : record.amount;
-      list[index].date =
-        record.date !== moment(date).format("MM-DD-YYYY")
-          ? moment(date).format("MM-DD-YYYY")
-          : record.date;
-      addBills(list);
-      setIsDrawerVisible(false);
-      clearDrawer();
+      if (index > -1) {
+        list[index].category =
+          record.category !== category ? category : record.category;
+        list[index].description =
+          record.description !== description ? description : record.description;
+        list[index].amount = record.amount ? amount : record.amount;
+        list[index].date =
+          record.date !== moment(date).format("MM-DD-YYYY")
+            ? moment(date).format("MM-DD-YYYY")
+            : record.date;
+        addBills(list);
+        setIsDrawerVisible(false);
+        clearDrawer();
+      }
     } else {
       setIsDrawerVisible(false);
       const bill = {
-        id: listOfBills.length + 1,
+        id: Math.random(),
         description: description,
         category: category,
         amount: amount,
