@@ -152,7 +152,7 @@ const DashBoardScreen = () => {
       list[index].date =
         record.date !== moment(date).format("MM-DD-YYYY")
           ? moment(date).format("MM-DD-YYYY")
-          : record.amount;
+          : record.date;
       addBills(list);
       setIsDrawerVisible(false);
       clearDrawer();
